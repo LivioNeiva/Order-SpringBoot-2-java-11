@@ -9,7 +9,7 @@ import com.livioneiva.cursos.entities.User;
 
 //camada de recursos - onde fica os controladores rest, os controladores rest, dependem da camada de serviços
 
-@RestController // para informarmos q seja recurso web implementado por um controlador web
+@RestController // para informarmos q essa classe seja recurso web implementado por um controlador rest
 @RequestMapping(value = "/users") // nome para recurso, acesso ao recurso
 public class UserResource {
 

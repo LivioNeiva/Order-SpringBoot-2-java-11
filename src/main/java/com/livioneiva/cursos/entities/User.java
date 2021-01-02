@@ -2,10 +2,19 @@ package com.livioneiva.cursos.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class User implements Serializable {
-	
+	//Serializable, serve para ser os objetos sejam transformado em cadeia de bytes, para que o 
+	//objeto trafeque na rede, para que o objeto possa ser gravado em arquivos...
 	private static final long serialVersionUID = 1L;
 	
+	@Id //informamos o campo vai ser a chave primaria da tabela user
+	@GeneratedValue(strategy = GenerationType.IDENTITY)//indetificando campo como auto-incremento
 	private Long id;
 	private String name;
 	private String email;
@@ -92,7 +101,7 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", password=" + password
+		return "User [id= " + id + ", name= " + name + ", email= " + email + ", phone= " + phone + ", password=" + password
 				+ "]";
 	}
 	
