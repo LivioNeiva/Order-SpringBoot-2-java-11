@@ -2,12 +2,12 @@ package com.livioneiva.cursos.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
+import javax.persistence.Entity; //javax.persistence -> é a especificação do jpa, temos q dar preferencia a especificação
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+@Entity //
 public class User implements Serializable {
 	//Serializable, serve para ser os objetos sejam transformado em cadeia de bytes, para que o 
 	//objeto trafeque na rede, para que o objeto possa ser gravado em arquivos...
