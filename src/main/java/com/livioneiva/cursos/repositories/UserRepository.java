@@ -1,10 +1,12 @@
 package com.livioneiva.cursos.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.livioneiva.cursos.entities.User;
 
 //usaremos a interface UserRepository para salvar os dados no banco de dados
+@Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 	
 }
@@ -25,5 +27,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
  * se definirmos o JpaRepository<E,id) "generic" utilizando sua entidade "User" 
  * e id da entidade "Long" ja teremos uma implementaão padrao para esse tipo especifico
  * de definimos JpaRepository<User, Long>
- * so a com a definição tudo brando ja está pronto
+ * so a com a definição tudo branco ja está pronto
  */
