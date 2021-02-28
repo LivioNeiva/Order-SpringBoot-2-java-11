@@ -1,13 +1,18 @@
 package com.livioneiva.cursos.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity; //javax.persistence -> é a especificação do jpa, temos q dar preferencia a especificação
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-@Entity //
+@Entity
+@Table(name = "tab_user")
 public class User implements Serializable {
 	//Serializable, serve para ser os objetos sejam transformado em cadeia de bytes, para que o 
 	//objeto trafeque na rede, para que o objeto possa ser gravado em arquivos...
@@ -20,6 +25,9 @@ public class User implements Serializable {
 	private String email;
 	private String phone;
 	private String password;
+	
+	@OneToMany(mappedBy = "client") // relacionamento muitos para 1
+	private List<Order> order = new ArrayList<>();
 	
 	public User() {
 		
@@ -73,6 +81,10 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public List<Order> getOrder() {
+		return order;
+	}
 
 	@Override
 	public int hashCode() {
@@ -104,6 +116,6 @@ public class User implements Serializable {
 		return "User [id= " + id + ", name= " + name + ", email= " + email + ", phone= " + phone + ", password=" + password
 				+ "]";
 	}
-	
+
 	
 }

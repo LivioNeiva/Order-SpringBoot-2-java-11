@@ -21,9 +21,12 @@ public class UserResource {
 	@Autowired //dependencia
 	UserServices services;
 
-	// metodo para acessar usuarios da classe User
-	// ResponseEntity - retorna resposta de requisiçoes web, o mesmo é generico e
-	// retorna um tipo<T>
+	/*
+	 *  metodo para acessar usuarios da classe User
+	 *  ResponseEntity - retorna resposta de requisiçoes web, o mesmo é generico e
+	 *   retorna um tipo<T>
+	 */
+
 	@GetMapping // informa q o metodo responde a requizição do tipo get do http
 	public ResponseEntity<List<User>> localizar() {
 		List<User> list = services.localizar();
