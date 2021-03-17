@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.livioneiva.cursos.entities.User;
-import com.livioneiva.cursos.services.UserServices;
+import com.livioneiva.cursos.services.UserService;
 
 //camada de recursos - onde fica os controladores rest, os controladores rest dependem da camada de serviços
 
@@ -19,7 +19,7 @@ import com.livioneiva.cursos.services.UserServices;
 public class UserResource {
 	
 	@Autowired //dependencia
-	UserServices services;
+	UserService services;
 
 	/*
 	 *  metodo para acessar usuarios da classe User

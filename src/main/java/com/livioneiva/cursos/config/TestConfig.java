@@ -1,7 +1,6 @@
 package com.livioneiva.cursos.config;
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +8,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.livioneiva.cursos.entities.Category;
 import com.livioneiva.cursos.entities.Order;
 import com.livioneiva.cursos.entities.User;
 import com.livioneiva.cursos.entities.enums.OrderStatus;
+import com.livioneiva.cursos.repositories.CategoryRepository;
 import com.livioneiva.cursos.repositories.OrderRepository;
 import com.livioneiva.cursos.repositories.UserRepository;
 //so roda a coniguração abaixo quando estiver no perfil de test
@@ -26,6 +27,9 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private OrderRepository orderRepository;
+	
+	@Autowired
+	private CategoryRepository categoryReposity;
 
 	//database seeding -> povoar banco de dados
 	@Override
@@ -53,9 +57,14 @@ public class TestConfig implements CommandLineRunner {
 		 * horario local. resumo "HORARIO CORRETO"
 		 */
 		
+		Category cat1 = new Category(null, "Electronics");
+		Category cat2 = new Category(null, "Books");
+		Category cat3 = new Category(null, "Computers");
+		
 		//userRepository é meu obj repository q acessa os dados
 		userRepository.saveAll(Arrays.asList(u1,u2));//salvando os obj no banco de dados
 		orderRepository.saveAll(Arrays.asList(o1,o2,o3));
+		categoryReposity.saveAll(Arrays.asList(cat1, cat2, cat3));
 		
 		
 	}

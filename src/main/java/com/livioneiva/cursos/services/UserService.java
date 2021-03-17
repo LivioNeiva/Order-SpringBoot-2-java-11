@@ -11,7 +11,7 @@ import com.livioneiva.cursos.repositories.UserRepository;
 
 //@Component = registra a classe como um componente do Spring, para que seja injetado como dependencia @Autowired
 @Service
-public class UserServices {
+public class UserService {
 
 	@Autowired
 	private UserRepository repository;
