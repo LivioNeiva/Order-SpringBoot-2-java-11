@@ -16,14 +16,21 @@ public class UserServices {
 	@Autowired
 	private UserRepository repository;
 	
-	public List<User> localizar(){
+	public List<User> findAll(){
 		return repository.findAll();
 	}
 	//recupera o usuario por id
-	public User localizarId(Long id) {
+	//Optional<T> pode exixtir um objeto ou nao, retorna um obj optinal
+	public User findById(Long id) {
 		Optional<User> obj = repository.findById(id);
-		return obj.get();
+		return obj.get();//get() = i retornar o obj do tipo user que estiver dentro do optional
 	}
 	
-	
+	/*
+	//Optional<T> pode exixtir um objeto ou nao, retorna um obj optinal
+	@GetMapping("{id}")
+	public Optional<Cliente> acharPorId(@PathVariable Integer id) {
+		return repository.findById(id);
+	}
+	*/
 }

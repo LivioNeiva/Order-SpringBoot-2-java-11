@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 import com.livioneiva.cursos.entities.User;
 
 //usaremos a interface UserRepository para salvar os dados no banco de dados
-@Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+@Repository //nao é obrigatorio por @Repository, pois a interface userRepository ja está herdando essa anotations do jpaRepository
+public interface UserRepository extends JpaRepository<User, Long> {//o JpaRepository ja está registrado como componente do String
 	
 }
 

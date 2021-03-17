@@ -11,8 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "tab_user")
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity //gera uma entidade na tabela
+@Table(name = "tab_user") //nome da tabela se chamara tab_user
 public class User implements Serializable {
 	//Serializable, serve para ser os objetos sejam transformado em cadeia de bytes, para que o 
 	//objeto trafeque na rede, para que o objeto possa ser gravado em arquivos...
@@ -26,8 +28,11 @@ public class User implements Serializable {
 	private String phone;
 	private String password;
 	
-	@OneToMany(mappedBy = "client") // relacionamento muitos para 1
-	private List<Order> order = new ArrayList<>();
+	//exite um relacionamento entre a tabela order e tabela pedido, 1 cliente pode ter muitos pedidos, mais 1 pedido so pertence a 1 cliente
+	//esse mapeamento é opcinal, caso queira acessar o obj do tipo usuario, e acessar os pedidos do cliente
+	@JsonIgnore //retira o loop feito pelo relacionamento entre as classes,seráa exibido os itens do relacionamento Order
+	@OneToMany(mappedBy = "client") // relacionamento muitos para 1, 1 cliente tem muitos pedidos, temos mapear o nome da chave estrangeira está tabela user,(mappedBy = "client"), client é nome da variavel q está na classe Order
+	private List<Order> order = new ArrayList<>(); // instanciando a coleção new ArrayList<>()
 	
 	public User() {
 		
@@ -81,7 +86,8 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+	//um array de list so colocamos o get, pelo fato de nao trocarmos a lista em nenhum momento, e sim apagamos ou inserimos elementos na lista(coleção)
+	//se é uma coleção, usamos somente o gets
 	public List<Order> getOrder() {
 		return order;
 	}

@@ -1,5 +1,7 @@
 package com.livioneiva.cursos.config;
 
+import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +9,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.livioneiva.cursos.entities.Order;
 import com.livioneiva.cursos.entities.User;
+import com.livioneiva.cursos.entities.enums.OrderStatus;
+import com.livioneiva.cursos.repositories.OrderRepository;
 import com.livioneiva.cursos.repositories.UserRepository;
 //so roda a coniguração abaixo quando estiver no perfil de test
 @Configuration //informa é classe especifica de configuração
@@ -18,6 +23,9 @@ public class TestConfig implements CommandLineRunner {
 	//injeção de dependência, declarando a dependencia
 	@Autowired // Sppring faz a dependencia e associar uma instancia do UserRepository no TestConfig
 	private UserRepository userRepository;
+	
+	@Autowired
+	private OrderRepository orderRepository;
 
 	//database seeding -> povoar banco de dados
 	@Override
@@ -26,18 +34,74 @@ public class TestConfig implements CommandLineRunner {
 		User u1 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
 		User u2 = new User(null, "Alex Green", "alex@gmail.com", "977777777", "123456");
 		
+		/*
+		instanciando os objs do tipo Order
+		estamos colocando uma data no formaoto iso 8601, define varias possibilidade de formatos data "2019-06-20T19:53:07Z"
+		a letra "Z" informa q esse horario esta no padrão UTC é horario de greenwich, é greenwich timezone=GMT
+		é muito importante a vc padronizar a forma que seu horario está sendo representado
+		no formato de String, para q depois possa ser convertido para horario local
+		*/
+		
+		Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), OrderStatus.PAGO, u1);
+		Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), OrderStatus.AGUARDANDO_PAGAMENTO, u2);
+		Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.AGUARDANDO_PAGAMENTO, u1);
+		
+		/*
+		 * no dba vai aparecer o horario com 3hrs de atraso.
+		 * Motivo: o computaor do usuario esta com horario do brasil, o horario de brasilia
+		 * é 3hrs atrasado em relação ao horario UTC, O Banco de dados H2 está trablhando com
+		 * horario local. resumo "HORARIO CORRETO"
+		 */
+		
 		//userRepository é meu obj repository q acessa os dados
 		userRepository.saveAll(Arrays.asList(u1,u2));//salvando os obj no banco de dados
+		orderRepository.saveAll(Arrays.asList(o1,o2,o3));
+		
 		
 	}
 }
+/*
+acontecerar um loop
+a biblioteca q faz a serialização para sistema, é jackson, o mesmo acusou um erro
+por causa do loop, por causa da associação de mao dupla entre as 
+classes User e Order ou seja, ambos se relacionam, User se relaciona com Order 
+e Order se relaciona com user, e json q é a biblioteca de serialização, 
+o loop é User chama Order,	e os pedidos chamam o usuario. a biblioteca q faz a
+serialização para nossas classes é jackson e jackson acousou um erro de loop.
+para resolver o problemas temos colocar uma annotation @JsonIgnote em um dos lados.
+ */
+/*
+ * https://www.conversion.com.br/blog/lazy-loading/
+ lazy Loading
+ quando vc carrega a classe q tem o relacionamento 1 para muitos, o relacionamento
+ muitos nao é exibido na requisição, para nao causar entidão, para nao estourar a memoria
+ e o trafico do computador, é feito lazy loading
+ quando vc carrega a classe q tem relacionamento muitos para 1, o relacioamento é listado
+ na requisição.
+ as informações acima é padrão
+ 
+ Lazy loading é um padrão de projeto de software, comumente utilizado em linguagens de 
+ programação, para adiar a inicialização de um objeto até o ponto em que ele é 
+ necessário. Isso pode contribuir para a eficiência no funcionamento de um programa, se 
+ utilizado adequadamente[1]. O oposto do carregamento lento (lazy) é o carregamento 
+ imediato (eager). Os ganhos de desempenho são especialmente significativos quando 
+ inicializar um objeto é custoso, como no caso de acesso a serviços de rede e a listas 
+ de objetos de banco de dados (ver JPA e Hibernate). Isso o torna ideal em casos onde o 
+ conteúdo é acessado em um servidor de rede, como no caso de sistemas Web[2].
+ 
+ spring.jpa.open-in-view=true
+ #JPA. open-in-view=true = chama o jpa para pegar informações dos relacionamentos das 
+ tabelas e exibir na requisição, ex. tenho por @JsonIgnore no relacionamento da classe
+ para q possa ser exbido na requisição, isso so acontece pq colocamos no arquivo
+ properdies essa linha de comando spring.jpa.open-in-view=true
+ */
 
 /*
  * classe de configuraão para instanciar o banco de dados
  */
 
 /*
-pro file de teste é um perfil do seu projeto especifico para fazer teste
+@ProFile de teste é um perfil do seu projeto especifico para fazer teste
 /*
  * configurar o nosso banco de dados de teste, que vai ser o banco de dados H2
  * muito utiliado em java para fazer testes em aplicações, és um banco de dados em memoria
