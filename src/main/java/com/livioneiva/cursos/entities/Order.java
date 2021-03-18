@@ -36,9 +36,9 @@ public class Order implements Serializable {
 
 	Integer orderStatus;
 	
-	// exite um relacionamento entre a tabela order e tabela pedido, 1 cliente pode
+	// exite um relacionamento entre a tabela order e tabela User, 1 cliente pode
 	// ter muitos pedidos, mais o pedido so pertence a 1 cliente
-	@ManyToOne // relacionamento 1 para muitos
+	@ManyToOne // relacionamento muitos para 1
 	@JoinColumn(name = "client_id") // nome da chave estrangeira vai ficar na tabela order
 	private User client;
 

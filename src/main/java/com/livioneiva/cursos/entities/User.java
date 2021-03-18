@@ -30,7 +30,7 @@ public class User implements Serializable {
 	
 	//exite um relacionamento entre a tabela order e tabela pedido, 1 cliente pode ter muitos pedidos, mais 1 pedido so pertence a 1 cliente
 	//esse mapeamento é opcinal, caso queira acessar o obj do tipo usuario, e acessar os pedidos do cliente
-	@JsonIgnore //retira o loop feito pelo relacionamento entre as classes,seráa exibido os itens do relacionamento Order
+	@JsonIgnore //retira o loop feito pelo relacionamento entre as classes,seráa exibido os itens do relacionamento Order. colocamos no relacionamento muitos
 	@OneToMany(mappedBy = "client") // relacionamento muitos para 1, 1 cliente tem muitos pedidos, temos mapear o nome da chave estrangeira está tabela user,(mappedBy = "client"), client é nome da variavel q está na classe Order
 	private List<Order> order = new ArrayList<>(); // instanciando a coleção new ArrayList<>()
 	
