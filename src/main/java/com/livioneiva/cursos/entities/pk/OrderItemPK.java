@@ -6,6 +6,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.livioneiva.cursos.entities.Order;
 import com.livioneiva.cursos.entities.Product;
 
@@ -14,7 +15,7 @@ import com.livioneiva.cursos.entities.Product;
 é uma classe auxiliar de chave primaria composta
 No JPA quando precisamos definir uma chave composta precisamos criar uma classe separada 
 apenas com os atributos que fazem parte da chave composta e precisamos utilizar a 
-anotaçãojavax.persistence.Embeddable.
+anotação: javax.persistence.Embeddable.
  */
 
 @Embeddable //informa que está classe será adicionado em outra entidade.
@@ -26,7 +27,7 @@ public class OrderItemPK implements Serializable {
 	@JoinColumn(name = "order_id") //o nome da chave estrangeira na tabela
 	private Order order;
 	
-	@ManyToOne
+	@ManyToOne //muitos p/ um = os produtos podem está em muitos pedidos, mais existi apanas 1 produto especifico. Ex Arroz marata 1230, esse é único 
 	@JoinColumn(name = "product_id")
 	private Product product;
 	
@@ -45,7 +46,6 @@ public class OrderItemPK implements Serializable {
 	
 	/*
 	 * o hashCode e equals = usaremos os dois objs order e product para fazer a compraração
-	 * e por em ordem crescente.	 
 	 */
 	
 	@Override

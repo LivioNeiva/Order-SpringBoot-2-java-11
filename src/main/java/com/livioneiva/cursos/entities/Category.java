@@ -25,14 +25,19 @@ public class Category implements Serializable {
 	private Long id;
 	private String nome;
 	
-	//RELACIONAMENTO MUITOS PARA MUITOS.
-	//para garantir q o mesma Category nao vai se repetir, usaremos uma collections
-	//usaremos o Set. O Set é uma interface nao pode ser instanciado, por isso instanciamos HashSet<>()
-	//dentro da category, eu tenho um conj. de product, e dentro do product eu tenho conj. Category. RELACIONAMENTO MUITOS PARA MUITOS.
+	/*
+	 RELACIONAMENTO MUITOS PARA MUITOS.
+	para garantir q o mesma Category nao vai se repetir, usaremos uma collections
+	usaremos o Set. O Set é uma interface nao pode ser instanciado, por isso instanciamos HashSet<>()
+	dentro da category, eu tenho um conj. de product, e dentro do product eu tenho conj. 
+	Category. RELACIONAMENTO MUITOS PARA MUITOS.
 	//@Transient //vai impedir q o jpa tente interpretar esse obj
-	//na anotations muito para muitos, vamos colocar uma referencia para o mateamento feito na classe Product no relacionamento Set<Category> categories
-	@JsonIgnore //retira o loop
-	@ManyToMany(mappedBy = "categories")
+	na anotations muito para muitos, vamos colocar uma referencia para o mateamento feito 
+	na classe Product no relacionamento Set<Category> categories = new HashSet<>();
+	 */
+	@JsonIgnore //retira o loop, nao será exibido o relacionamento Product
+	//(mappedBy = "categories") = é a referencia feita na tabela Product Set<Category> categories = new HashSet<>();
+	@ManyToMany(mappedBy = "categories") // "categories" -> é o nome da collections q está na classe Pproduct, a mesma faz o relacionamento com a classe Category
 	private Set<Product> products = new HashSet<>();
 	
 	public Category() {
