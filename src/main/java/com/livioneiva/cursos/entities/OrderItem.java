@@ -19,6 +19,7 @@ public class OrderItem implements Serializable {
 	//id composto
 	@EmbeddedId //chave composta através da anotação @Embeddable
 	private OrderItemPK id = new OrderItemPK(); //uma dependencia com obj da classe auxiliar de chave primaria composta 
+	
 	//obs = se nao instanciar o obj id, o mesmo ficara null, e vai gerar um bug ao setar o id.setOrder() e id.setproduct()
 	private Integer quant;
 	private Double price;
@@ -34,16 +35,19 @@ public class OrderItem implements Serializable {
 		this.quant=quant;
 		this.price=price;
 	}
+	
 	//getOrder é uma dependencia da classe OrderItemPK q tem uma dependencia da classe Order
 	@JsonIgnore //retira o loop feito pelo relacionamento entre as classes. leia a baixo a explicação
 	public Order getOrder() {
 		return id.getOrder();//retorna o order(pedido), q está na chave composta, @Jsonignore retira o loop
 	}
+	
 	//setOrder add order da classe OrdemItemPK, é uma dependencia da classe Order
 	public void setOrder(Order order) {
 		id.setOrder(order);//seta uma Order(pedido) para chave composta id
 	}
 	
+	//@JsonIgnore //com JsonIgnore nesse metodo, nos iremos listar as Order(pedidos) do produto
 	public Product getProduct() {
 		return id.getProduct();
 	}

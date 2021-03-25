@@ -11,8 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -47,6 +47,11 @@ public class Product implements Serializable {
 																	// entidade, chama-se Category
 	private Set<Category> categories = new HashSet<>();// instanciamos para garantir q a coleção nao começe com null e
 														// sim vazia
+	
+	//o obj items é uma collections q armazenarar os Order
+	@OneToMany(mappedBy = "id.product")//"id.product" = o nome product tem ser igual ao obj tipo Product está na classe composta OrddemItemPK
+	private Set<OrderItem> items = new HashSet<>();
+	
 	public Product() {
 
 	}
@@ -101,6 +106,15 @@ public class Product implements Serializable {
 
 	public Set<Category> getCategories() {
 		return categories;
+	}
+	
+	@JsonIgnore //nao será listado as ordems que pertence ao produto e sim o produto q pertence as Order
+	public Set<Order> getOrders(){
+		Set<Order> set = new HashSet<>();
+			for(OrderItem x : this.items) {
+				set.add(x.getOrder());
+			}
+		return set;
 	}
 
 	@Override
