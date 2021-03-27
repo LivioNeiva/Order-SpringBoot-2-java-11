@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.livioneiva.cursos.entities.Category;
 import com.livioneiva.cursos.entities.Order;
 import com.livioneiva.cursos.entities.OrderItem;
+import com.livioneiva.cursos.entities.Payment;
 import com.livioneiva.cursos.entities.Product;
 import com.livioneiva.cursos.entities.User;
 import com.livioneiva.cursos.entities.enums.OrderStatus;
@@ -90,7 +91,7 @@ public class TestConfig implements CommandLineRunner {
 		*/
 		
 		Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), OrderStatus.PAGO, u1);
-		Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), OrderStatus.AGUARDANDO_PAGAMENTO, u2);
+		Order o2 = new Order(null, Instant.parse("2019-09-15T13:53:05Z"), OrderStatus.AGUARDANDO_PAGAMENTO, u2);
 		Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.AGUARDANDO_PAGAMENTO, u1);
 		Order o4 = new Order(null, Instant.parse("2021-03-23T01:43:10Z"), OrderStatus.ENVIADO, u3);
 		/*
@@ -111,6 +112,19 @@ public class TestConfig implements CommandLineRunner {
 		OrderItem oi5 = new OrderItem(o4, p6, 5, p6.getPrice());
 		
 		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4,oi5));
+		
+		/*
+		 * para salvermos um obj dependente numa relação 1p/1, nao podemos chamar o 
+		 * repository do proprio obj. Vamos fazer a associação de mao dupla em 
+		 * memoria. o1.setPayment(pay1)
+		 */
+		Payment pay1 = new Payment(null, Instant.parse("2019-06-20T21:53:07Z"), o1);
+		o1.setPayment(pay1); //associamos o o1 com payment pay1, associaçao de mo dupla em memoria
+		
+		//vamos mandar salvar novamente o pedido no caso o Order
+		//o JPA vai salvar o pagamento desse pedido
+		orderRepository.save(o1);
+
 		
 	}
 }

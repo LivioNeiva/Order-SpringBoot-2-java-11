@@ -5,6 +5,7 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,10 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.livioneiva.cursos.entities.enums.OrderStatus;
 
 //clsse order é a classe pedido
@@ -59,6 +60,16 @@ public class Order implements Serializable {
 	@OneToMany(mappedBy = "id.order")
 	private Set<OrderItem> items = new HashSet<>();
 	
+	/*
+	 CascadeType.ALL = como estamos mapeando 1 p/ 1, nos estamos mapeando o mesmo id
+	 ex. se o pedido for codigo 5o Payment tb terár q ter o codigo 5. e nesse caso de
+	 mapear relaçao de 1 p/ 1 com mesmo id, é obrigatorio vc colocar 
+	 cascade = CascadeType.ALL
+	 */
+	
+	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+	private Payment payment;
+	
 	public Order() {
 
 	}
@@ -89,6 +100,22 @@ public class Order implements Serializable {
 	public User getClient() {
 		return client;
 	}
+	
+	public void setClient(User client) {
+		this.client = client;
+	}
+	
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
+	
+	public Set<OrderItem> getItems() {
+		return items;
+	}
 
 	//retorna code do OrderStatus 
 	public OrderStatus getOrderStatus() {//o orderStatus está no argumento é um valor inteiro
@@ -103,10 +130,6 @@ public class Order implements Serializable {
 			this.orderStatus = orderStatus.getCode();//getCode() retorna um inteiro equivalente ao ENUM foi passado no argumento
 		}
 		
-	}
-
-	public void setClient(User client) {
-		this.client = client;
 	}
 
 	@Override

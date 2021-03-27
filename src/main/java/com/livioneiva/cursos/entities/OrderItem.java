@@ -47,7 +47,7 @@ public class OrderItem implements Serializable {
 		id.setOrder(order);//seta uma Order(pedido) para chave composta id
 	}
 	
-	//@JsonIgnore //com JsonIgnore nesse metodo, nos iremos listar as Order(pedidos) do produto
+	//@JsonIgnore //com @JsonIgnore nesse metodo, nos iremos listar as Order(pedidos) do produto
 	public Product getProduct() {
 		return id.getProduct();
 	}

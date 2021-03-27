@@ -48,8 +48,12 @@ public class Product implements Serializable {
 	private Set<Category> categories = new HashSet<>();// instanciamos para garantir q a coleção nao começe com null e
 														// sim vazia
 	
-	//o obj items é uma collections q armazenarar os Order
-	@OneToMany(mappedBy = "id.product")//"id.product" = o nome product tem ser igual ao obj tipo Product está na classe composta OrddemItemPK
+	/*
+	 * precisamos pegar as Order no qual o product pertence. primeiro entramos no
+	 * nos OrderItem q Product, e com metodo getOrders(), chegaremos as Ordes do product
+	 * o obj items é uma collections q armazenará os OrderItem na qual o produto pertence
+	 */
+	@OneToMany(mappedBy = "id.product")//"id.product" = o id pertence a classe OrderItem, o nome product tem ser igual ao obj tipo Product está na classe composta OrddemItemPK
 	private Set<OrderItem> items = new HashSet<>();
 	
 	public Product() {
@@ -108,10 +112,14 @@ public class Product implements Serializable {
 		return categories;
 	}
 	
-	@JsonIgnore //nao será listado as ordems que pertence ao produto e sim o produto q pertence as Order
+	/*
+	 * eu vou varrer toda a collection de OrderItem q está associado ao produto e para 
+	 * cada orderItem eu vou associar o obj Order q está associado ao obj OrderItem
+	 */
+	@JsonIgnore //nao será listado as Orders que pertence ao produto e sim o produto q pertence as Order
 	public Set<Order> getOrders(){
-		Set<Order> set = new HashSet<>();
-			for(OrderItem x : this.items) {
+		Set<Order> set = new HashSet<>();//criamos um Set para receber coletions Order
+			for(OrderItem x : this.items) {//obj Order x recebe as Order está collection items
 				set.add(x.getOrder());
 			}
 		return set;
