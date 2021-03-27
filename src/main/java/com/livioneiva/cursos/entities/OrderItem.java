@@ -68,6 +68,12 @@ public class OrderItem implements Serializable {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
+	//faz parte do nivel logico e nao do nivel conceitual
+	//subTotal de um produto
+	public Double getSubTotal() {
+		return price*quant;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

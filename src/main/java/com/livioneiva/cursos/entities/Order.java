@@ -62,7 +62,7 @@ public class Order implements Serializable {
 	
 	/*
 	 CascadeType.ALL = como estamos mapeando 1 p/ 1, nos estamos mapeando o mesmo id
-	 ex. se o pedido for codigo 5o Payment tb terár q ter o codigo 5. e nesse caso de
+	 ex. se o pedido for codigo 5 o Payment tb terár q ter o codigo 5. e nesse caso de
 	 mapear relaçao de 1 p/ 1 com mesmo id, é obrigatorio vc colocar 
 	 cascade = CascadeType.ALL
 	 */
@@ -115,6 +115,14 @@ public class Order implements Serializable {
 	
 	public Set<OrderItem> getItems() {
 		return items;
+	}
+	//faz parte do nivel logico e nao do nivel conceitual
+	public Double getTotal() {
+		Double sum = 0.0;
+			for(OrderItem x : items) {
+				sum += x.getSubTotal();
+			}
+		return sum;
 	}
 
 	//retorna code do OrderStatus 

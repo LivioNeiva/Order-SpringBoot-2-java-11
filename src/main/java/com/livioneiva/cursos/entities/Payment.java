@@ -30,7 +30,7 @@ public class Payment implements Serializable {
 	private Long id;
 	private Instant moment;
 	
-	@JsonIgnore
+	@JsonIgnore//lista os pagamento nas order
 	@OneToOne
 	@MapsId
 	private Order order;
