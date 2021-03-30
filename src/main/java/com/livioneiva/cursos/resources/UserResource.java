@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -76,6 +77,12 @@ public class UserResource {
 	 */
 	}
 
+	@DeleteMapping(value = "/{id}")//Void pq nao vai retornar nada.
+	public ResponseEntity<Void> delete(@PathVariable Long id){//@PathVariable = para serr econhecido como uma vaiavel da minha url
+		services.delete(id);
+		return ResponseEntity.noContent().build();//pelo fato de ser uma resposta sem corpo eu chamo noContent, e codigo http de uma resposta q nao tem conteudo é 204
+		//noContent = O código de resposta HTTP de status de sucesso 204 No Content indica que a solicitação foi bem sucedida e o cliente não precisa sair da página atual. Uma resposta 204 é armazenada em cache por padrão. Um cabeçalho ETag está incluso na resposta
+	}
 }
 /*
 
