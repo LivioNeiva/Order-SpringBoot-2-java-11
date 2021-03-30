@@ -3,6 +3,8 @@ package com.livioneiva.cursos.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -61,5 +63,32 @@ public class UserService {
 		impediu de atender à solicitação. 
 
 		 */
+	}
+	public User update(Long id, User obj) {
+		/*
+		getOne()ele vai instanciar o usuario, so q nao vai fazer a operação no dba, ele vai 
+		deixar o obj monitorado pelo jpa, para que seja trabalhado com ele, e em seguida eu 
+		possa eetuar alguma operação com dba. E melhor do q usar o findById, o findById
+		vai no banco de dados e traz o bj para ser feita a operação. o getOne() nao, ele
+		so prepara o obj monitorado para que seja feito as alterações e depois efetuar
+		uma operação com dba. esse precesso é mais eiciente
+		 */
+		try {
+			//vamos atualizar o obj entity com os dados q vinheram do argumento update(User obj)o id so para localizar obj
+			User entity = repository.getOne(id);
+			//criamos um metodo(função) chamada updateData
+			updateData(entity, obj);//metodo q atualiza os dados do obj entity tipo User,baseado nos dados q chegaram do obj q tb é do tipo User
+			return repository.save(entity);
+		}
+		catch(EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
+	}
+	//metodo q atualiza os dados do obj entity tipo User, 
+	//baseado nos dados q chegaram do obj q tb é do tipo User
+	private void updateData(User entity, User obj) {//vamos atualizar os dados do entity,com base no q chegou do obj
+		entity.setName(obj.getName());
+		entity.setEmail(obj.getEmail());
+		entity.setPhone(obj.getPhone());
 	}
 }
