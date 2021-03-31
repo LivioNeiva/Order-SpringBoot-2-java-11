@@ -49,12 +49,22 @@ public class UserService {
 	public void delete(Long id) {
 		try {
 			repository.deleteById(id);
-		
-		}catch(EmptyResultDataAccessException e) {
-			throw new ResourceNotFoundException(id);
-		
+		}
+		//capture a exception e lanço a minha exception de serviço, leia como fazer,o texto
+		//esta no fim do sistema
+		//essa exception EmptyResultDataAccessException é lançada quando nao encontramos o id para deletar
+		catch(EmptyResultDataAccessException e) {//capturei a excessão correta e vou lançar o ResponseStatus correto
+			throw new ResourceNotFoundException(id); //instancio a classe criada para herda o RunTimeException
+		/*
+		capture a exception e lanço a minha exception de serviço, leia como fazer texto
+		esta no fim do sistema
+		essa exceptions é lançada quando tentamos deletar um registro q está relacionado
+		a outro registro, erro de constraint, erro no banco de dados."ConstraintViolationException"
+		o que aconteceu foi, uma violação de integridade do banco de dados
+		*/
 		}catch(DataIntegrityViolationException e) {
-			throw new DatabaseException(e.getMessage());
+			//estou lançando uma exception da minha camada services
+			throw new DatabaseException(e.getMessage());//lançaremos uma exceptions feita pelo progrmador
 		}
 		/*
 		500 Internal Server Error = acontece quando vc for apagar um registo

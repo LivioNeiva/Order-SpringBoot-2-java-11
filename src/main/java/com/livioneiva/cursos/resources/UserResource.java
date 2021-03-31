@@ -92,8 +92,17 @@ public class UserResource {
 		return ResponseEntity.ok().body(obj);
 	}
 }
-/*
 
+/*
+caso vc deseje capturar uma exception para saber como vai trata-la, use
+obs. apos compilar o sistema, limpe o console e tente apagar um registro inexistente
+no metodo delete
+catch(RunTimeExection e){
+	e.printStackTrace();
+}
+ */
+
+/*
 @ResponseStatus  //  @ResponseEntity
 diferença de ResponseStatus e ResponseEntity
 uma resposta http é formado por um cabeçalho, status e corpo da resposta.

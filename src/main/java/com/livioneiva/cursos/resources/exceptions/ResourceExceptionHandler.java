@@ -37,12 +37,13 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(status).body(err);
 	}
 	
+	@ExceptionHandler(DatabaseException.class)
 	public ResponseEntity<StandardError> database(DatabaseException e, HttpServletRequest request){
-		String error = "Resource not found";
-		HttpStatus status = HttpStatus.NOT_FOUND;
+		String error = "Data base errors erros constrain no dba";
+		HttpStatus status = HttpStatus.BAD_REQUEST;//vamos lançar a exception correta, é 400 Bad Request, esta aparecendo a 500
 		StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
 		
-		return null;
+		return ResponseEntity.status(status).body(err);
 		
 	}
 }
