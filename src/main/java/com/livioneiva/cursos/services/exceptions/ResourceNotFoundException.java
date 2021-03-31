@@ -1,10 +1,17 @@
 package com.livioneiva.cursos.services.exceptions;
 
-public class ResourceNotFoundException extends RuntimeException {
+//para nao gerar o erro 500 Internal Server Error e sim o erro 404 Not Found,erro correto
+public class ResourceNotFoundException extends RuntimeException {//sub classe RunTimeException
 	private static final Long serialVersionUID = 1L;
 	
+	//estou passando o obj q eu tentei encontrar, so q, nao encontrei
+	//ResourceNotFoundException = recurso nao encontrado
 	public ResourceNotFoundException(Object id) {
 		super("Resource not found id: "+id);
+		/*
+		chamamos o construtor da super classe, com metodo super() e retornamos
+		a msg q está esctrita no argumento 
+		*/
 	}
 }
 

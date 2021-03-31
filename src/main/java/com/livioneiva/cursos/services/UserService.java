@@ -29,7 +29,9 @@ public class UserService {
 	//Optional<T> pode exixtir um objeto ou nao, retorna um obj optinal
 	public User findById(Long id) {
 		Optional<User> obj = repository.findById(id);
-		return obj.get();//get() = i retornar o obj do tipo user que estiver dentro do optional
+		//o .get(), da a excepions 500 caso o id nao estivesse presente, vamor fazer a troca pelo orElseThrow
+		//return obj.get();//get() = i retornar o obj do tipo user que estiver dentro do optional
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	/*
@@ -65,14 +67,14 @@ public class UserService {
 		 */
 	}
 	public User update(Long id, User obj) {
-		/*
-		getOne()ele vai instanciar o usuario, so q nao vai fazer a operação no dba, ele vai 
-		deixar o obj monitorado pelo jpa, para que seja trabalhado com ele, e em seguida eu 
-		possa eetuar alguma operação com dba. E melhor do q usar o findById, o findById
-		vai no banco de dados e traz o bj para ser feita a operação. o getOne() nao, ele
-		so prepara o obj monitorado para que seja feito as alterações e depois efetuar
-		uma operação com dba. esse precesso é mais eiciente
-		 */
+	/*
+	getOne()ele vai instanciar o usuario, so q nao vai fazer a operação no dba, ele vai 
+	deixar o obj monitorado pelo jpa, para que seja trabalhado com ele, e em seguida programador 
+	possa eetuar alguma operação com dba. E melhor do q usar o findById, o findById
+	vai no banco de dados e traz o obj para ser feita a operação. o getOne() nao, ele
+	so prepara o obj monitorado para que seja feito as alterações e depois efetuar
+	uma operação com dba. esse precesso é mais eiciente
+	 */
 		try {
 			//vamos atualizar o obj entity com os dados q vinheram do argumento update(User obj)o id so para localizar obj
 			User entity = repository.getOne(id);
