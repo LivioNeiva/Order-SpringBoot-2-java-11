@@ -104,3 +104,13 @@ public class UserService {
 		entity.setPhone(obj.getPhone());
 	}
 }
+
+/*
+tempos q por exception especifica do problema, temos capturar a exception correta
+caso vc deseje capturar uma exception para saber como vai trata-la, use
+obs. apos compilar o sistema, limpe o console e tente apagar um registro inexistente
+no metodo delete
+catch(RunTimeExection e){
+	e.printStackTrace();
+}
+ */
