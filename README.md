@@ -1,5 +1,9 @@
 # Projeto web services com Spring Boot e JPA / Hibernate
 Apache Tomcat, Mavem, H2, Postman
+
+![GitHub language count](https://img.shields.io/github/languages/count/LivioNeiva/Order-SpringBoot-2-java-11)
+![GitHub top language](https://img.shields.io/github/languages/top/LivioNeiva/MyCash-Gastos-Despesas)
+
 ![GitHub repo size](https://img.shields.io/github/repo-size/LivioNeiva/Order-SpringBoot-2-java-11)
 ![GitHub](https://img.shields.io/github/license/LivioNeiva/Order-SpringBoot-2-java-11)
 
