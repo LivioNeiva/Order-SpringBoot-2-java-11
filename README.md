@@ -1,3 +1,9 @@
+<!--
+* é italico,ex *casa
+* com espaço serve para lista de itens. ex * casa
+lista ordenada= 1 casa 2 mesa 3 cadeira
+
+-->
 # Projeto web services com Spring Boot e JPA / Hibernate
 Apache Tomcat, Mavem, H2, Postman
 
@@ -10,6 +16,8 @@ Apache Tomcat, Mavem, H2, Postman
 
 
 ### Objetivos
+
+```
 ✔ Criar um projeto spring boot java
 ✔ Implementar modelos de dominio
 ✔ Estruurar Camadas Logicas: Resource, Service, Repository
@@ -17,8 +25,13 @@ Apache Tomcat, Mavem, H2, Postman
 ✔ Povoar banco de Dados
 ✔ CRUD - create, Retrieve, Update, Delete
 ✔ Tratamento de Exceptions
-
+```
 ### Ferramenta de trabalho
 <!-- ![]() para por uma imagem -->
 ![imagem](https://github.com/LivioNeiva/Order-SpringBoot-2-java-11/blob/main/tomcat%20H2%20maven%20jpa.jpeg)
 
+<!--
+### assistir a um video de intrudução
+
+-->
+![]()
