@@ -10,7 +10,7 @@ Apache Tomcat, Mavem, H2, Postman
 ![GitHub top language](https://img.shields.io/github/languages/top/LivioNeiva/MyCash-Gastos-Despesas)
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/LivioNeiva/Order-SpringBoot-2-java-11)
-![GitHub](https://img.shields.io/github/license/LivioNeiva/Order-SpringBoot-2-java-11)
+[![GitHub](https://img.shields.io/github/license/livioneiva/MyCash-Gastos-Despesas)](https://github.com/LivioNeiva/MyCash-Gastos-Despesas/blob/main/LICENSE)
 
 
 
@@ -36,7 +36,17 @@ Apache Tomcat, Mavem, H2, Postman
 ### assistir a um video de intrudução
 lin videos yuotub
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
--->
+
 <!-- criando link
 [nome do link](htttp//link)
+
+```java
+codigo java
+```
+
+```bash
+codigo terminal de comando
+c:\> cd pasta
+````
+
 -->
