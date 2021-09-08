@@ -45,6 +45,14 @@ Apache Tomcat, Mavem, H2, Postman
 ✔ hashCode & equals
 ✔ Serializable
 ```
+### Commit: H2 database, test profile, JPA
+## Checklist:
+```
+✔ JPA & H2 dependencies
+✔ application.properties
+✔ application-test.properties
+✔ Entity: JPA mapping
+```
 <!--
 ### assistir a um video de intrudução
 lin videos yuotub
