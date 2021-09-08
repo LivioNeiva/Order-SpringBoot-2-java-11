@@ -32,6 +32,8 @@ Apache Tomcat, Mavem, H2, Postman
 ### Modelo de Dominio
 ![diagrama de classe](https://github.com/LivioNeiva/Order-SpringBoot-2-java-11/blob/main/diagrama%20classe.jpeg)
 
+### Modelo de Camadas
+![modelo camads](https://github.com/LivioNeiva/Order-SpringBoot-2-java-11/blob/main/logica%20das%20camadas.jpeg)
 
 ### Commit: User entity and resource
 #### Basic entity checklist:
