@@ -32,6 +32,17 @@ Apache Tomcat, Mavem, H2, Postman
 ### Modelo de Dominio
 ![diagrama de classe](https://github.com/LivioNeiva/Order-SpringBoot-2-java-11/blob/main/diagrama%20classe.jpeg)
 
+
+### Commit: User entity and resource
+#### Basic entity checklist:
+```
+✔ Basic attributes
+✔ Associations (instantiate collections)
+✔ Constructors
+✔ Getters & Setters (collections: only get)
+✔ hashCode & equals
+✔ Serializable
+```
 <!--
 ### assistir a um video de intrudução
 lin videos yuotub
