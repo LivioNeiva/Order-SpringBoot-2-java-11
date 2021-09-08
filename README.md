@@ -46,7 +46,7 @@ Apache Tomcat, Mavem, H2, Postman
 ✔ Serializable
 ```
 ### Commit: H2 database, test profile, JPA
-## Checklist:
+#### Checklist:
 ```
 ✔ JPA & H2 dependencies
 ✔ application.properties
